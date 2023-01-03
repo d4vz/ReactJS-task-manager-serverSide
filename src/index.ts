@@ -1,21 +1,28 @@
 import express, { Request, Response } from 'express';
-import { createConnection } from 'mysql2';
+import { getTasks, getTaskById, createTask, updateTask, deleteTask } from './services/task.services';
 
 const app = express();
-const port = 3000;
+app.use(express.json());
 
-const connection = createConnection({
-  host: 'localhost',
-  user: 'seu_usuario',
-  password: 'sua_senha',
-  database: 'nome_do_banco'
+app.get('/tasks', getTasks);
+
+app.get('/tasks/:id', getTaskById);
+
+app.post('/tasks', (req: Request, res: Response) => {
+  createTask(req, res);
 });
 
-app.get('/tasks', (req: Request, res: Response) => {
-  
+app.put('/tasks/:id', (req: Request, res: Response) => {
+  updateTask(req, res);
+});
+
+app.delete('/tasks/:id', (req: Request, res: Response) => {
+  deleteTask(req, res);
 });
 
 
-app.listen(port, () => {
-  console.log(`API listening on port ${port}`);
+
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
 });
