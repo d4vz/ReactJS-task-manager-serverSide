@@ -4,7 +4,7 @@ import  { Connection }  from "../db/mysql"
 export const getTasks = (req: Request, res: Response) => {
   Connection.query('SELECT * FROM tasks', (error, results, fields) => {
     if (error) throw error;
-    res.send(results);
+    res.json(results).status(200);
   });
 };
 
@@ -12,7 +12,7 @@ export const getTaskById = (req: Request, res: Response) => {
   const id = req.params.id;
   Connection.query('SELECT * FROM tasks WHERE id = ?', [id], (error, results, fields) => {
     if (error) throw error;
-    res.send(results);
+    res.json(results).status(200);
   });
 }
 
