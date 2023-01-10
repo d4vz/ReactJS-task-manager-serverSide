@@ -1,7 +1,9 @@
 import express, { Request, Response } from 'express';
-import { getTasks, getTaskById, createTask, updateTask, deleteTask } from './services/task.services';
+import { getTasks, getTaskById, createTask, deleteTask } from './services/task.services';
+import cors from 'cors';
 
 const app = express();
+app.use(cors())
 app.use(express.json());
 
 app.get('/tasks', getTasks);
@@ -10,10 +12,6 @@ app.get('/tasks/:id', getTaskById);
 
 app.post('/tasks', (req: Request, res: Response) => {
   createTask(req, res);
-});
-
-app.put('/tasks/:id', (req: Request, res: Response) => {
-  updateTask(req, res);
 });
 
 app.delete('/tasks/:id', (req: Request, res: Response) => {

@@ -24,14 +24,6 @@ export const createTask = (req: Request, res: Response) => {
   });
 }
 
-export const updateTask = (req: Request, res: Response) => {
-  const id = req.params.id;
-  const task = req.body;
-  Connection.query('UPDATE tasks SET ? WHERE id = ?', [task, id], (error) => {
-    if (error) throw error;
-    res.send("Task updated successfully");
-  });
-}
 
 export const deleteTask = (req: Request, res: Response) => {
   const id = req.params.id;
